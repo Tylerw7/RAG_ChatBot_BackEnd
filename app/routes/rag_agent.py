@@ -3,7 +3,11 @@ from typing import TypedDict, Annotated
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import os
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import PyPDFLoader
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+
+
 
 
 
@@ -29,6 +33,14 @@ embeddings = OpenAIEmbeddings(
     api_key=api_key
 )
 
+### Load PDF
+pdf_loader = PyPDFLoader(".cbw_rag_info.pdf")
+
+### Text Splitter
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size = 500,
+    chunk_overlap = 100
+)
 
 
 
